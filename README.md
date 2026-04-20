@@ -1,44 +1,44 @@
 # Sistemas de Monitorización - IES Enric Soler i Godes
 
-[cite_start]Este proyecto consiste en el diseño y despliegue de una infraestructura de monitorización completa sobre un entorno virtualizado, utilizando herramientas de código abierto para garantizar la disponibilidad y el rendimiento de servicios informáticos[cite: 4, 5, 20].
+Este proyecto consiste en el diseño y despliegue de una infraestructura de monitorización completa sobre un entorno virtualizado, utilizando herramientas de código abierto para garantizar la disponibilidad y el rendimiento de servicios informáticos.
 
 ## 👤 Autores
-* [cite_start]**Kevin Murciano Gadea** [cite: 6]
-* [cite_start]**Sergio Ferrá Boix** [cite: 6]
-* **NIA:** 10788620 | [cite_start]10663813 [cite: 7]
-* [cite_start]**Curso:** 2025-2026 [cite: 3]
+* **Kevin Murciano Gadea** (NIA: 10788620)
+* **Sergio Ferrá Boix** (NIA: 10663813)
+* **Curso:** 2025-2026
 
 ---
 
 ## 🚀 Descripción del Proyecto
-[cite_start]El objetivo principal es transformar una gestión reactiva de incidencias en un modelo proactivo[cite: 40, 56]. [cite_start]La solución se basa en un servidor físico con **Proxmox VE** que gestiona diversas máquinas virtuales independientes dedicadas a la supervisión y alertas[cite: 47, 114].
+El objetivo principal es transformar una gestión reactiva de incidencias en un modelo proactivo. En lugar de esperar a que el usuario reporte un fallo, el sistema monitoriza la red 24/7 para detectar anomalías antes de que afecten al servicio.
+
+La solución se basa en un servidor físico con **Proxmox VE** que gestiona diversas máquinas virtuales independientes dedicadas a la supervisión, análisis de rendimiento y gestión de alertas.
 
 ## 🛠️ Stack Tecnológico
-[cite_start]El proyecto utiliza exclusivamente software de código abierto para eliminar costes de licencias[cite: 133].
+El proyecto utiliza exclusivamente software de código abierto (Open Source).
 
 | Componente | Herramienta | Función |
 | :--- | :--- | :--- |
-| **Hipervisor** | Proxmox VE 8.x | [cite_start]Virtualización de tipo 1 basada en KVM[cite: 134, 135]. |
-| **Monitorización Web** | Uptime Kuma | [cite_start]Disponibilidad de servicios y endpoints (HTTP/S, TCP, DNS)[cite: 127, 138]. |
-| **Monitorización Avanzada** | Pandora FMS | [cite_start]Rendimiento de hardware: CPU, RAM, Red y Disco[cite: 129, 141]. |
-| **Notificaciones** | Gotify | [cite_start]Servidor de alertas push autoalojado con API REST[cite: 131, 144]. |
-| **Contenedores** | Docker Engine | [cite_start]Base para el despliegue de Uptime Kuma[cite: 138, 140]. |
+| **Hipervisor** | Proxmox VE 8.x | Virtualización de tipo 1 (KVM/LXC). |
+| **Monitorización Web** | Uptime Kuma | Disponibilidad de servicios (HTTP/S, TCP, DNS, Ping). |
+| **Monitorización Avanzada** | Pandora FMS | Rendimiento de hardware: CPU, RAM, Red y Disco. |
+| **Notificaciones** | Gotify / ntfy | Servidor de alertas push autoalojado con API REST. |
+| **Contenedores** | Docker Engine | Base para el despliegue de microservicios. |
 
 ---
 
 ## 🏗️ Arquitectura del Sistema
-[cite_start]El sistema se estructura en tres capas principales[cite: 111]:
+El sistema se estructura en tres capas principales:
 
-* [cite_start]**Hardware:** Servidor físico x86-64 con soporte para virtualización (Intel VT-x / AMD-V)[cite: 152].
-* [cite_start]**Virtualización:** Capa gestionada por Proxmox VE que aloja 3 máquinas virtuales independientes[cite: 114, 115, 116].
-* [cite_start]**Servicios:** Comunicación integrada donde Uptime Kuma y Pandora FMS envían alertas a Gotify para notificaciones en tiempo real[cite: 117, 118].
+* **Hardware:** Servidor físico x86-64 donado por empresa de FCT.
+* **Virtualización:** Entorno gestionado por Proxmox VE que aloja 3 máquinas virtuales (Ubuntu Server y AlmaLinux).
+* **Servicios:** Flujo de alertas integrado donde los monitores envían datos a Gotify para notificaciones móviles inmediatas.
 
-## 🔐 Seguridad
-[cite_start]Para garantizar la integridad del sistema, se han implementado las siguientes medidas[cite: 235]:
-* [cite_start]**Aislamiento:** Cada servicio corre en una VM independiente para contener fallos[cite: 238].
-* [cite_start]**Acceso Restringido:** Consolas web accesibles únicamente desde la LAN del centro; sin exposición a Internet[cite: 236, 237].
-* [cite_start]**Recuperación:** Copias de seguridad periódicas (snapshots de Proxmox y volcados de MySQL)[cite: 241].
+## 🔐 Seguridad y Mantenimiento
+* **Aislamiento:** Cada servicio corre en una VM independiente para contener posibles fallos de seguridad.
+* **Acceso LAN:** Las consolas web solo son accesibles desde la red interna del centro.
+* **Backups:** Implementación de snapshots periódicos en Proxmox y volcados de bases de datos SQL para recuperación ante desastres.
 
 ## 📂 Estructura del Repositorio
-* [cite_start]**`/scripts`**: Contiene los scripts automatizados en Bash para la instalación de los servicios[cite: 170, 171, 204].
-* **`/docs`**: Documentación técnica, memoria del proyecto y esquemas de red.
+* **`/scripts`**: Automatización en Bash para la instalación de Docker, Uptime Kuma y Pandora FMS.
+* **`/docs`**: Memoria técnica detallada y esquemas de red del proyecto.
