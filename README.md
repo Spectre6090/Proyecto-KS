@@ -1,44 +1,143 @@
-# Sistemas de Monitorización - IES Enric Soler i Godes
+# Sistemas de Monitorización — IES Enric Soler i Godes
 
-Este proyecto consiste en el diseño y despliegue de una infraestructura de monitorización completa sobre un entorno virtualizado, utilizando herramientas de código abierto para garantizar la disponibilidad y el rendimiento de servicios informáticos.
+![Proxmox](https://img.shields.io/badge/Proxmox_VE-E57000?style=flat&logo=proxmox&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![nginx](https://img.shields.io/badge/nginx-009639?style=flat&logo=nginx&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnubash&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-## 👤 Autores
-* **Kevin Murciano Gadea** (NIA: 10788620)
-* **Sergio Ferrá Boix** (NIA: 10663813)
-* **Curso:** 2025-2026
+Diseño y despliegue de una infraestructura de monitorización completa sobre un entorno virtualizado con Proxmox VE, utilizando exclusivamente herramientas de código abierto. El objetivo es transformar una gestión reactiva de incidencias en un modelo proactivo: detectar anomalías antes de que afecten al servicio.
 
 ---
 
-## 🚀 Descripción del Proyecto
-El objetivo principal es transformar una gestión reactiva de incidencias en un modelo proactivo. En lugar de esperar a que el usuario reporte un fallo, el sistema monitoriza la red 24/7 para detectar anomalías antes de que afecten al servicio.
+## Autores
 
-La solución se basa en un servidor físico con **Proxmox VE** que gestiona diversas máquinas virtuales independientes dedicadas a la supervisión, análisis de rendimiento y gestión de alertas.
+| Nombre | NIA |
+| :--- | :--- |
+| Kevin Murciano Gadea | 10788620 |
+| Sergio Ferrá Boix | 10663813 |
 
-## 🛠️ Stack Tecnológico
-El proyecto utiliza exclusivamente software de código abierto (Open Source).
+**Curso:** 2025-2026 · Administració de Sistemes Informàtics en Xarxa · IES Enric Soler i Godes
 
-| Componente | Herramienta | Función |
+---
+
+## Stack tecnológico
+
+| Componente | Herramienta | Versión |
 | :--- | :--- | :--- |
-| **Hipervisor** | Proxmox VE 8.x | Virtualización de tipo 1 (KVM/LXC). |
-| **Monitorización Web** | Uptime Kuma | Disponibilidad de servicios (HTTP/S, TCP, DNS, Ping). |
-| **Monitorización Avanzada** | Pandora FMS | Rendimiento de hardware: CPU, RAM, Red y Disco. |
-| **Notificaciones** | Gotify / ntfy | Servidor de alertas push autoalojado con API REST. |
-| **Contenedores** | Docker Engine | Base para el despliegue de microservicios. |
+| Hipervisor | Proxmox VE | 8.x |
+| Monitorización de disponibilidad | Uptime Kuma | 1.x |
+| Monitorización avanzada | Pandora FMS Community | Latest |
+| Notificaciones push | Gotify | Latest |
+| Notificaciones HTTP | ntfy | Latest |
+| Portal web centralizado | KS-Dashboard (nginx) | 1.0 |
+| Contenedores | Docker Engine | Latest |
+
+Todo el software utilizado es de código abierto. No se ha adquirido ninguna licencia de pago.
 
 ---
 
-## 🏗️ Arquitectura del Sistema
+## Arquitectura
+
 El sistema se estructura en tres capas principales:
 
-* **Hardware:** Servidor físico x86-64 donado por empresa de FCT.
-* **Virtualización:** Entorno gestionado por Proxmox VE que aloja 3 máquinas virtuales (Ubuntu Server y AlmaLinux).
-* **Servicios:** Flujo de alertas integrado donde los monitores envían datos a Gotify para notificaciones móviles inmediatas.
+- **Hardware:** Servidor físico x86-64 donado por empresa de FCT.
+- **Virtualización:** Proxmox VE gestiona tres máquinas virtuales independientes (Ubuntu Server 24.04 y AlmaLinux 9).
+- **Servicios:** Uptime Kuma y Pandora FMS envían alertas a Gotify y ntfy, que distribuyen notificaciones push a los dispositivos de los administradores.
 
-## 🔐 Seguridad y Mantenimiento
-* **Aislamiento:** Cada servicio corre en una VM independiente para contener posibles fallos de seguridad.
-* **Acceso LAN:** Las consolas web solo son accesibles desde la red interna del centro.
-* **Backups:** Implementación de snapshots periódicos en Proxmox y volcados de bases de datos SQL para recuperación ante desastres.
+```
+Servidor físico
+└── Proxmox VE
+    ├── VM 1 — Uptime Kuma     (10.2.1.168)
+    ├── VM 2 — Pandora FMS     (10.2.1.167)
+    └── VM 3 — Gotify + ntfy   (10.2.1.169)
 
-## 📂 Estructura del Repositorio
-* **`/scripts`**: Automatización en Bash para la instalación de Docker, Uptime Kuma y Pandora FMS.
-* **`/docs`**: Memoria técnica detallada y esquemas de red del proyecto.
+Portal web
+└── KS-Dashboard (nginx)       (10.2.1.170)
+    ├── → Pandora FMS
+    ├── → Uptime Kuma
+    ├── → Gotify
+    └── → ntfy
+```
+
+---
+
+## KS-Dashboard
+
+Portal web centralizado que unifica el acceso a todas las herramientas de monitorización bajo una única interfaz con autenticación y gestión de usuarios.
+
+![KS-Dashboard](docs/diagrams/ks-dashboard-screenshot.png)
+*(screenshot)*
+
+**Accesos configurados:**
+
+| Herramienta | URL |
+| :--- | :--- |
+| Pandora FMS | `http://10.2.1.167/pandora_console` |
+| Uptime Kuma | `http://10.2.1.168:3001` |
+| Gotify | `http://10.2.1.169:8080` |
+| ntfy | `http://10.2.1.169:8081` |
+
+---
+
+## Estructura del repositorio
+
+```
+/
+├── README.md
+├── .gitignore
+├── /scripts
+│   ├── README.md
+│   ├── install_uptime_kuma.sh
+│   ├── install_pandora.sh
+│   └── install_ks_dashboard.sh
+├── /ks-dashboard
+│   ├── index.html
+│   └── install.sh
+└── /docs
+    ├── memoria.pdf
+    └── /diagrams
+        └── arquitectura.png
+```
+
+---
+
+## Despliegue rápido
+
+**Requisitos previos:**
+- Proxmox VE 8.x instalado y accesible
+- Máquinas virtuales con Ubuntu Server 24.04 o AlmaLinux 9
+- Acceso root a las VMs
+
+**1. Uptime Kuma**
+```bash
+sudo bash scripts/install_uptime_kuma.sh
+```
+
+**2. KS-Dashboard**
+```bash
+sudo bash ks-dashboard/install.sh
+# El dashboard queda disponible en http://10.2.1.170
+```
+
+---
+
+## Seguridad
+
+- Acceso a las consolas web restringido exclusivamente a la LAN del centro.
+- Contraseñas con un mínimo de 12 caracteres en todos los servicios.
+- Cada servicio corre en una VM independiente para contener posibles fallos.
+- Copias de seguridad periódicas mediante cron jobs: snapshots de Proxmox y volcados de base de datos MySQL (Pandora FMS).
+- Sistema operativo y contenedores Docker actualizados regularmente.
+
+---
+
+## Documentación
+
+La memoria técnica completa, los esquemas de red y los diagramas de arquitectura se encuentran en la carpeta [`/docs`](./docs).
+
+---
+
+## Licencia
+
+Este proyecto se distribuye bajo licencia MIT. Consulta el fichero [`LICENSE`](./LICENSE) para más información.
