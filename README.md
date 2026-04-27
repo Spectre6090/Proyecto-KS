@@ -8,7 +8,7 @@
 
 Diseño y despliegue de una infraestructura de monitorización completa sobre un entorno virtualizado con Proxmox VE, utilizando exclusivamente herramientas de código abierto. El objetivo es transformar una gestión reactiva de incidencias en un modelo proactivo: detectar anomalías antes de que afecten al servicio.
 
----
+---dashboard
 
 ## Autores
 
@@ -51,9 +51,11 @@ Servidor físico
     ├── VM 1 — Uptime Kuma     (10.2.1.168)
     ├── VM 2 — Pandora FMS     (10.2.1.167)
     └── VM 3 — Gotify + ntfy   (10.2.1.169)
+    └── VM 4 — KS-Client       (10.2.1.165)
+    └── VM 5 — KS-Dashboard    (10.2.1.166)
 
 Portal web
-└── KS-Dashboard (nginx)       (10.2.1.170)
+└── KS-Dashboard (nginx)       (10.2.1.166)
     ├── → Pandora FMS
     ├── → Uptime Kuma
     ├── → Gotify
