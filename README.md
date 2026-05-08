@@ -313,9 +313,8 @@ Para garantizar la alta disponibilidad, se despliegan dos nodos nginx con **Keep
 │   ├── index.html
 │   └── install.sh
 └── /docs
-    ├── Memoria projecte kevin y sergi...
-    └── Memoria projecte kevin y sergio...
-
+    ├── Memoria projecte kevin y sergi.odt
+    └── Memoria projecte kevin y sergio.pdf
 ---
 
 ## Documentación
