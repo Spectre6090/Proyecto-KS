@@ -312,8 +312,7 @@ Para garantizar la alta disponibilidad, se despliegan dos nodos nginx con **Keep
 │   ├── install_uptime_kuma.sh
 │   └── pandorafms_install.sh
 ├── /ks-dashboard
-│   ├── index.html
-│   └── install.sh
+│   └── index.html
 └── /docs
     ├── Memoria projecte kevin y sergi.odt
     └── Memoria projecte kevin y sergio.pdf
