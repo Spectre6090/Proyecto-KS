@@ -303,19 +303,18 @@ Para garantizar la alta disponibilidad, se despliegan dos nodos nginx con **Keep
 ## Estructura del repositorio
 /
 ├── README.md
-├── .gitignore
+├── LICENSE
 ├── /scripts
-│   ├── README.md
+│   ├── install_gotify.sh
+│   ├── install_ntfy.sh
 │   ├── install_uptime_kuma.sh
-│   ├── install_pandora.sh
-│   └── install_gotify.sh
+│   └── pandorafms_install.sh
 ├── /ks-dashboard
 │   ├── index.html
 │   └── install.sh
 └── /docs
-├── memoria.pdf
-└── /diagrams
-└── arquitectura.png
+    ├── Memoria projecte kevin y sergi...
+    └── Memoria projecte kevin y sergio...
 
 ---
 
