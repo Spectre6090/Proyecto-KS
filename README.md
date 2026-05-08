@@ -1,3 +1,66 @@
+# Sistemas de Monitorización — IES Enric Soler i Godes
+
+![Proxmox](https://img.shields.io/badge/Proxmox_VE-E57000?style=flat&logo=proxmox&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![nginx](https://img.shields.io/badge/nginx-009639?style=flat&logo=nginx&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnubash&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
+Diseño y despliegue de una infraestructura de monitorización completa sobre un entorno virtualizado con Proxmox VE, utilizando exclusivamente herramientas de código abierto. El objetivo es transformar una gestión reactiva de incidencias en un modelo proactivo: detectar anomalías antes de que afecten al servicio.
+
+---
+
+## Autores
+
+| Nombre | NIA |
+| :--- | :--- |
+| Kevin Murciano Gadea | 10788620 |
+| Sergio Ferrá Boix | 10663813 |
+
+**Curso:** 2025-2026 · Administració de Sistemes Informàtics en Xarxa · IES Enric Soler i Godes
+
+---
+
+## Stack tecnológico
+
+| Componente | Herramienta | Versión |
+| :--- | :--- | :--- |
+| Hipervisor | Proxmox VE | 8.x |
+| Monitorización de disponibilidad | Uptime Kuma | 1.x |
+| Monitorización avanzada | Pandora FMS Community | Latest |
+| Notificaciones push | Gotify | Latest |
+| Notificaciones HTTP | ntfy | Latest |
+| Portal web centralizado | KS-Dashboard (nginx) | 1.0 |
+| Contenedores | Docker Engine | Latest |
+| Gestión de credenciales | KeePassXC | Latest |
+
+Todo el software utilizado es de código abierto. No se ha adquirido ninguna licencia de pago.
+
+---
+
+## Arquitectura
+
+El sistema se estructura en tres capas principales:
+
+- **Hardware:** Servidor físico x86-64 donado por empresa de FCT.
+- **Virtualización:** Proxmox VE gestiona las máquinas virtuales independientes (Ubuntu Server 24.04 y AlmaLinux 9).
+- **Servicios:** Uptime Kuma y Pandora FMS envían alertas a Gotify y ntfy, que distribuyen notificaciones push a los dispositivos de los administradores.
+Servidor físico (donado por empresa FCT)
+└── Proxmox VE (10.2.1.253)
+├── VM 1 — Uptime Kuma          (10.2.1.168)
+├── VM 2 — Pandora FMS          (10.2.1.167)
+├── VM 3 — Gotify + ntfy        (10.2.1.169)
+├── VM 4 — KS-Client            (10.2.1.163)
+├── VM 5 — KS-Dashboard (VM)    (10.2.1.166)
+│          KS-Dashboard (Web)   (10.2.1.165)
+└── VM 6 — KS-Dashboard-Backup  (10.2.1.164)
+Portal web
+└── KS-Dashboard (nginx)            (10.2.1.165)
+├── → Pandora FMS
+├── → Uptime Kuma
+├── → Gotify
+└── → ntfy
+
 | Componente | Función principal |
 | :--- | :--- |
 | Servidor físico (hardware) | Base de cómputo: CPU, RAM y almacenamiento para todas las VMs |
@@ -238,3 +301,30 @@ Para garantizar la alta disponibilidad, se despliegan dos nodos nginx con **Keep
 ---
 
 ## Estructura del repositorio
+/
+├── README.md
+├── .gitignore
+├── /scripts
+│   ├── README.md
+│   ├── install_uptime_kuma.sh
+│   ├── install_pandora.sh
+│   └── install_gotify.sh
+├── /ks-dashboard
+│   ├── index.html
+│   └── install.sh
+└── /docs
+├── memoria.pdf
+└── /diagrams
+└── arquitectura.png
+
+---
+
+## Documentación
+
+La memoria técnica completa, los esquemas de red y los diagramas de arquitectura se encuentran en la carpeta [`/docs`](./docs).
+
+---
+
+## Licencia
+
+Este proyecto se distribuye bajo licencia MIT. Consulta el fichero [`LICENSE`](./LICENSE) para más información.
