@@ -3,9 +3,9 @@
 ![Proxmox](https://img.shields.io/badge/Proxmox_VE-E57000?style=flat&logo=proxmox&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
 ![nginx](https://img.shields.io/badge/nginx-009639?style=flat&logo=nginx&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnubash&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
 
 Diseño y despliegue de una infraestructura de monitorización completa sobre un entorno virtualizado con Proxmox VE, utilizando exclusivamente herramientas de código abierto. El objetivo es transformar una gestión reactiva de incidencias en un modelo proactivo: detectar anomalías antes de que afecten al servicio.
 
