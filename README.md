@@ -45,7 +45,8 @@ El sistema se estructura en tres capas principales:
 - **Hardware:** Servidor físico x86-64 donado por empresa de FCT.
 - **Virtualización:** Proxmox VE gestiona las máquinas virtuales independientes (Ubuntu Server 24.04 y AlmaLinux 9).
 - **Servicios:** Uptime Kuma y Pandora FMS envían alertas a Gotify y ntfy, que distribuyen notificaciones push a los dispositivos de los administradores.
-Servidor físico (donado por empresa FCT)
+```
+Servidor físico (Prestado por el profesorado)
 └── Proxmox VE (10.2.1.253)
 ├── VM 1 — Uptime Kuma          (10.2.1.168)
 ├── VM 2 — Pandora FMS          (10.2.1.167)
@@ -60,6 +61,7 @@ Portal web
 ├── → Uptime Kuma
 ├── → Gotify
 └── → ntfy
+```
 
 | Componente | Función principal |
 | :--- | :--- |
