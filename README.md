@@ -71,8 +71,8 @@ Portal web
 | VM 1 — Uptime Kuma | Monitorización de disponibilidad de servicios web y endpoints (HTTP/S, TCP, DNS) |
 | VM 2 — Pandora FMS Community | Monitorización avanzada de rendimiento: CPU, RAM, red, disco. Agentes SNMP |
 | VM 3 — Gotify + ntfy | Servidor de notificaciones push autoalojado. App Android oficial. API REST |
-| VM 4 — KS-Client | Cliente Ubuntu para administración y conexiones SSH |
-| VM 5/6 — KS-Dashboard | Portal web centralizado con alta disponibilidad (MASTER + BACKUP) |
+| VM 4/5 — KS-Dashboard | Portal web centralizado con alta disponibilidad (MASTER + BACKUP) |
+| VM 6 — KS-Client | Cliente Ubuntu para administración y conexiones SSH |
 
 ---
 
