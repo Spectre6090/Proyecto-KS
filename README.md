@@ -48,7 +48,7 @@ El sistema se estructura en tres capas principales:
 - **Servicios:** Uptime Kuma y Pandora FMS envían alertas a Gotify y ntfy, que distribuyen notificaciones push a los dispositivos de los administradores.
 ```
 Servidor físico (Prestado por el profesorado)
-└── Proxmox VE (10.2.1.253)
+Proxmox VE (10.2.1.253)
 ├── VM 1 — Uptime Kuma          (10.2.1.168)
 ├── VM 2 — Pandora FMS          (10.2.1.167)
 ├── VM 3 — Gotify + ntfy        (10.2.1.169)
