@@ -52,10 +52,10 @@ Servidor físico (Prestado por el profesorado)
 ├── VM 1 — Uptime Kuma          (10.2.1.168)
 ├── VM 2 — Pandora FMS          (10.2.1.167)
 ├── VM 3 — Gotify + ntfy        (10.2.1.169)
-├── VM 4 — KS-Client            (10.2.1.163)
-├── VM 5 — KS-Dashboard (VM)    (10.2.1.166)
+├── VM 4 — KS-Dashboard (VM)    (10.2.1.166)
 │          KS-Dashboard (Web)   (10.2.1.165)
-└── VM 6 — KS-Dashboard-Backup  (10.2.1.164)
+├── VM 5 — KS-Dashboard-Backup  (10.2.1.164)
+└── VM 6 — KS-Client            (10.2.1.163)
 Portal web
 └── KS-Dashboard (nginx)            (10.2.1.165)
 ├── → Pandora FMS
