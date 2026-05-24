@@ -367,6 +367,9 @@ Para garantizar la alta disponibilidad, se despliegan dos nodos nginx con **Keep
 └── /docs
     ├── Memoria projecte kevin y sergi.odt
     └── Memoria projecte kevin y sergio.pdf
+    └── presentacion
+        ├── SISTEMAS DE MONITORIZACIÓN.pdf
+        └── SISTEMAS DE MONITORIAZCIÓN.pptx
 ```
 
 ---
